@@ -1,0 +1,506 @@
+openapi: 3.0.0
+info:
+  title: Music Bands Service
+  version: 1.0.0
+  description: A sample API for interaction with a collection of music bands
+servers:
+# ПОМЕНЯТЬ!!!
+  - url: 'https://localhost:45382/api/v1'
+
+paths:
+  /bands:
+    post:
+      summary: Создание новой группы
+      tags: 
+        - Bands
+      operationId: createBand
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Band"
+      responses:
+        '200':
+          description: Успешный ответ с данными о созданной группе
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Band"
+        '400':
+           description: Ошибка. Данные введены некорректно
+           content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                    example: 400
+                  message:
+                    type: string
+                    example: Координата y не может быть меньше -439
+                  time:
+                    type: string
+                    format: date-time
+                    example: 2024-09-13T11:00:01.637Z
+    get:
+      summary: Получение всех групп
+      tags:
+        - Bands
+      operationId: getBands
+      parameters:
+        - name: page
+          in: query
+          description: Номер страницы (начиная с 1)
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+        - name: size
+          in: query
+          description: Размер страницы (количество элементов на одной странице)
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            example: 10
+        - name: id
+          in: query
+          description: Идентификатор группы
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+        - name: name
+          in: query
+          description: Имя группы
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            example: ZOLOTO
+        - name: coordinate.x
+          in: query
+          description: Координата х
+          required: false
+          schema:
+            type: number
+            format: int64
+            example: 1.0
+        - name: coordinate.y
+          in: query
+          description: Координата y
+          required: false
+          schema:
+            type: number
+            format: double
+            minimum: -439
+            example: 1
+        - name: creationDate
+          in: query
+          description: Дата создания
+          required: false
+          schema:
+            type: string
+            format: date-time
+            nullable: false
+            example: 2024-09-13T11:00:01.637Z
+        - name: numberOfParticipants
+          in: query
+          description: количество участников
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+        - name: description
+          in: query
+          description: описание группы
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            example: бебебе
+        - name: genre
+          in: query
+          description: Жанр группы
+          required: false
+          schema:
+            type: string
+            enum:
+              - ROCK
+              - SOUL
+              - MATH_ROCK
+              - POST_ROCK
+            example: SOUL
+        - name: person.name
+          in: query
+          description: Имя солиста
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            example: Владимир
+        - name: person.passportID
+          in: query
+          description: Идентификатор паспорта
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 22
+            example: 1123avefsv
+           
+      responses:
+        '200':
+          description: Успешный ответ с массивом групп
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Band"
+                  total:
+                    type: integer
+                    description: Общее количество элементов
+                  totalPages:
+                    type: integer
+                    description: Общее количество страниц
+                  currentPage:
+                    type: integer
+                    description: Текущий номер страницы
+                  size:
+                    type: integer
+                    description: Размер страницы
+        '400':
+          description: Ошибка. Неправильные параметры фильтрации или сортировки
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                    example: 400
+                  message:
+                    type: string
+                    example: Неправильные параметры
+                  time:
+                    type: string
+                    format: date-time
+                    example: 2024-09-13T11:00:01.637Z
+        '404':
+           description: Ошибка. Данный ресурс не найден
+           content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                    example: 404
+                  message:
+                    type: string
+                    example: Ресурс не найден
+                  time:
+                    type: string
+                    format: date-time
+                    example: 2024-09-13T11:00:01.637Z
+  /bands/{band_id}:
+    get:
+      summary: Получение группы по идентификатору
+      tags: 
+        - Bands
+      operationId: getPersonById
+      parameters:
+        - name: band_id
+          description: Идентификатор группы
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешный ответ с данными о группе
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Band"
+        '404':
+           description: Ошибка. Данный ресурс не найден
+           content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                    example: 404
+                  message:
+                    type: string
+                    example: Ресурс не найден
+                  time:
+                    type: string
+                    format: date-time
+                    example: 2024-09-13T11:00:01.637Z
+    delete:
+      summary: Удаление группы по идентификатору
+      tags: 
+        - Bands
+      operationId: deleteBandById
+      parameters:
+        - name: band_id
+          description: Идентификатор группы
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json: {}
+        '404':
+           description: Ошибка. Данный ресурс не найден
+           content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                    example: 404
+                  message:
+                    type: string
+                    example: Ресурс не найден
+                  time:
+                    type: string
+                    format: date-time
+                    example: 2024-09-13T11:00:01.637Z
+    put:
+      summary: Обновление данных о группе по идентификатору
+      tags: 
+        - Bands
+      operationId: updateBandById
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Band"
+      parameters:
+        - name: band_id
+          description: Идентификатор группы
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешный ответ с данными об обновлённой группе
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Band"
+        '400':
+           description: Ошибка. Данные введены некорректно
+           content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                    example: 400
+                  message:
+                    type: string
+                    example: Координата y не может быть меньше -439
+                  time:
+                    type: string
+                    format: date-time
+                    example: 2024-09-13T11:00:01.637Z
+            
+        '404':
+           description: Ошибка. Данный ресурс не найден
+           content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                    example: 404
+                  message:
+                    type: string
+                    example: Ресурс не найден
+                  time:
+                    type: string
+                    format: date-time
+                    example: 2024-09-13T11:00:01.637Z
+  /bands/{genre}:
+    delete:
+      summary: Удаление групп по жанру
+      tags: 
+        - Bands
+      operationId: deleteBandsByGenre
+      parameters:
+        - name: genre
+          description: Жанр группы
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - ROCK
+              - SOUL
+              - MATH_ROCK
+              - POST_ROCK
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json: {}
+        '404':
+           description: Ошибка. Данный ресурс не найден
+           content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                    example: 404
+                  message:
+                    type: string
+                    example: Ресурс не найден
+                  time:
+                    type: string
+                    format: date-time
+                    example: 2024-09-13T11:00:01.637Z
+  /bands/minGenre:
+    get:
+      summary: Получение группы с минимальным жанром
+      tags:
+        - Bands
+      operationId: getGroupWithMinGenre
+      responses:
+          '200':
+            description: Группа с минимальным жанром
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Band'
+          '400':
+            description: Ошибка. Неправильные параметры
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      format: int32
+                      example: 400
+                    message:
+                      type: string
+                      example: Неправильные параметры
+                    time:
+                      type: string
+                      format: date-time
+                      example: 2024-09-13T11:00:01.637Z
+components:
+  schemas:
+    Band:
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 1
+          uniqueItems: true
+          readOnly: true
+        name:
+          type: string
+          minLength: 1
+        coordinates:
+          $ref: '#/components/schemas/Coordinates'
+        creationDate:
+          type: string
+          format: date-time
+          readOnly: true
+          default: "${now}"
+        description:
+          type: string
+        genre:
+          $ref: '#/components/schemas/MusicGenre'
+        frontMan:
+          $ref: '#/components/schemas/Person'
+          
+    Person:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        birthday:
+          type: string
+          format: date
+          nullable: true
+        passportID:
+          type: string
+          uniqueItems: true
+        location:
+          $ref: '#/components/schemas/Location'
+          
+    Coordinates:
+      type: object
+      properties:
+        x:
+          type: number
+          format: int64
+        y:
+          type: number
+          format: double
+          minimum: -439
+          nullable: false
+      required:
+        - x
+        - y
+        
+    Location:
+      type: object
+      properties:
+        x:
+          type: number
+          format: float
+          nullable: false
+        y:
+          type: number
+          format: float
+        z:
+          type: integer
+        name:
+          type: string
+          minLength: 1
+          nullable: true
+        
+    MusicGenre:
+      type: string
+      enum:
+        - ROCK
+        - SOUL
+        - MATH_ROCK
+        - POST_ROCK
