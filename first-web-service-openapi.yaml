@@ -2,10 +2,9 @@ openapi: 3.0.0
 info:
   title: Music Bands Service
   version: 1.0.0
-  description: A sample API for interaction with a collection of music bands
+  description: Простое API для взаимодействия с коллекцией музыкальных групп
 servers:
-# ПОМЕНЯТЬ!!!
-  - url: 'https://localhost:45382/api/v1'
+  - url: 'https://localhost:8080/api/first'
 
 paths:
   /bands:
@@ -442,12 +441,20 @@ components:
           format: date-time
           readOnly: true
           default: "${now}"
+        numberOfParticipants:
+          type: number
+          format: int64
+          minimum: 1
         description:
           type: string
         genre:
           $ref: '#/components/schemas/MusicGenre'
         frontMan:
           $ref: '#/components/schemas/Person'
+        singles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Single'
           
     Person:
       type: object
@@ -464,7 +471,15 @@ components:
           uniqueItems: true
         location:
           $ref: '#/components/schemas/Location'
-          
+
+    Single:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 10
+
     Coordinates:
       type: object
       properties:

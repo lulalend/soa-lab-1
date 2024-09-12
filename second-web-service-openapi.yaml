@@ -1,0 +1,65 @@
+openapi: 3.0.0
+info:
+  title: Music Bands Service
+  version: 1.0.0
+  description: A sample API for interaction with a collection of music bands
+servers:
+  - url: 'https://localhost:8080/api/second'
+
+paths:
+  /band/{band-id}/singles/add:
+    post:
+      summary: Добавление нового сингла группе
+      tags: 
+        - Bands updates
+      operationId: addSingle
+      parameters:
+        - name: band-id
+          description: Идентификатор группы
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/Single'
+      responses:
+        '200':
+          description: Успешно добавлено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Single'
+        '400':
+          description: Некорректный ввод данных
+
+
+  /band/{band-id}/participants/add:
+    get:
+      summary: Добавление участника в группу
+      tags: 
+        - Bands updates
+      operationId: addParticipant
+      parameters:
+        - name: band-id
+          description: Идентификатор группы
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешно добавлено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Single'
+        '400':
+          description: Некорректный ввод данных
+
+components:
+  schemas:
+    Single:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 10
