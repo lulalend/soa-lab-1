@@ -43,12 +43,26 @@ paths:
                     message:
                       type: string
                       example: Неправильные параметры
+        '503':
+          description: Сервер не доступен
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                    example: 503
+                  message:
+                    type: string
+                    example: Сервер не доступен
         default:
           description: Дефолтная ошибка
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DefaultError'v
+                $ref: '#/components/schemas/DefaultError'
 
 
   /band/{band-id}/participants/add:
@@ -85,6 +99,20 @@ paths:
                     message:
                       type: string
                       example: Неправильные параметры
+        '503':
+          description: Сервер не доступен
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                    example: 503
+                  message:
+                    type: string
+                    example: Сервер не доступен
         default:
           description: Дефолтная ошибка
           content:

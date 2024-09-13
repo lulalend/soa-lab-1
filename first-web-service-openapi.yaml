@@ -39,7 +39,7 @@ paths:
                     example: 400
                   message:
                     type: string
-                    example: Координата y не может быть меньше -439
+                    example: ['Координата y не может быть меньше -439']
         default:
           description: Дефолтная ошибка
           content:
