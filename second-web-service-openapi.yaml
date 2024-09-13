@@ -19,9 +19,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            minLength: 1
-            maxLength: 10
+            type: number
+            minimum: 1
       responses:
         '200':
           description: Успешно добавлено
@@ -43,6 +42,76 @@ paths:
                     message:
                       type: string
                       example: Неправильные параметры
+        '503':
+          description: Сервер не доступен
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    format: int32
+                    example: 503
+                  message:
+                    type: string
+                    example: Сервер не доступен
+        default:
+          description: Дефолтная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultError'
+  
+  /bands/{band-id}/singles/{single-id}:
+    put:
+      summary: Изменение сингла
+      tags: 
+        - Bands updates
+      operationId: addParticipant
+      parameters:
+        - name: band-id
+          description: Идентификатор группы
+          in: path
+          required: true
+          schema:
+            type: number
+            minimum: 1
+        - name: single-id
+          description: Идентификатор сингла
+          in: path
+          required: true
+          schema:
+            type: number
+            minimum: 1
+        - name: single-id
+          description: Идентификатор сингла
+          in: query
+          required: true
+          schema:
+            type: string
+            maxLength: 10
+      responses:
+        '200':
+          description: Успешно добавлено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Single'
+        '400':
+            description: Ошибка. Неправильные параметры
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      format: int32
+                      example: 400
+                    message:
+                      type: string
+                      example: ['ID паспорта не может быть больше 22 символов']
         '503':
           description: Сервер не доступен
           content:
@@ -188,6 +257,11 @@ components:
     Single:
       type: object
       properties:
+        id:
+          type: integer
+          minimum: 1
+          uniqueItems: true
+          readOnly: true
         name:
           type: string
           minLength: 1

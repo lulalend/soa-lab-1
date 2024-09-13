@@ -432,63 +432,57 @@ paths:
         - Bands
       operationId: updateBandById
       parameters:
-        - name: id
-          in: query
-          description: Идентификатор группы
-          required: true
-          schema:
-            type: integer
-            minimum: 1
-            example: 1
-        - name: name
-          in: query
-          description: Имя группы
-          required: true
-            schema:
-              type: string
-              minLength: 1
-              example: ZOLOTO
-        - name: coordinate.x
-          in: query
-          description: Координата х
-          required: true
-            schema:
-              type: number
-              format: int64
-              example: 1
-        - name: coordinate.y
-          in: query
-          description: Координата y
-          required: false
-          schema:
-            type: number
-            format: double
-            minimum: -439
-            example: 1
-        - name: creationDate
-          in: query
-          description: Дата создания
-          required: false
-          schema:
-            type: string
-            format: date-time
-            nullable: false
-            example: 2024-09-13T11:00:01.637Z
-        - name: numberOfParticipants
-          in: query
-          description: количество участников
-          required: false
-          schema:
-            type: integer
-            minimum: 1
-            example: 1
-      parameters:
         - name: band-id
           description: Идентификатор группы
           in: path
           required: true
           schema:
             type: integer
+        - name: name
+          in: query
+          description: Имя группы
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            example: ZOLOTO
+        - name: coordinate.x
+          in: query
+          description: Координата х
+          required: true
+          schema:
+            type: number
+            format: int64
+            example: 1
+        - name: coordinate.y
+          in: query
+          description: Координата y
+          required: true
+          schema:
+            type: number
+            format: double
+            minimum: -439
+            example: 1
+        - name: description
+          in: query
+          description: Описание группы
+          required: true
+          schema:
+            type: string
+            example: bebebe
+        - name: genre
+          in: query
+          description: Жанр группы
+          required: true
+          schema:
+            type: string
+            enum:
+              - ROCK
+              - SOUL
+              - MATH_ROCK
+              - POST_ROCK
+            example: SOUL
+          
       responses:
         '200':
           description: Успешный ответ с данными об обновлённой группе
