@@ -238,7 +238,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        '204':
           description: Успешный ответ
           content:
             application/json: {}
@@ -313,7 +313,7 @@ paths:
               - MATH_ROCK
               - POST_ROCK
       responses:
-        '200':
+        '204':
           description: Успешный ответ
           content:
             application/json: {}
