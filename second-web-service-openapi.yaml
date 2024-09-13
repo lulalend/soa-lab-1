@@ -98,7 +98,7 @@ paths:
                       example: 400
                     message:
                       type: string
-                      example: Неправильные параметры
+                      example: ['ID паспорта не может быть больше 22 символов']
         '503':
           description: Сервер не доступен
           content:
