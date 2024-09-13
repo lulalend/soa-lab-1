@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: Простое API для взаимодействия с коллекцией музыкальных групп
 servers:
-  - url: 'https://localhost:8080/api/first'
+  - url: 'https://localhost:8080/api/v1/'
 
 paths:
   /bands:
@@ -214,7 +214,7 @@ paths:
                     type: string
                     format: date-time
                     example: 2024-09-13T11:00:01.637Z
-  /bands/{band_id}:
+  /bands/{band-id}:
     get:
       summary: Получение группы по идентификатору
       tags: 
@@ -349,9 +349,10 @@ paths:
                     type: string
                     format: date-time
                     example: 2024-09-13T11:00:01.637Z
-  /bands/{genre}:
+  /bands/genre/{genre}:
     delete:
       summary: Удаление групп по жанру
+      description: Регистронезависимый запрос
       tags: 
         - Bands
       operationId: deleteBandsByGenre
@@ -390,9 +391,10 @@ paths:
                     type: string
                     format: date-time
                     example: 2024-09-13T11:00:01.637Z
-  /bands/minGenre:
+  /bands/genre/min:
     get:
       summary: Получение группы с минимальным жанром
+      description: Сортировка идёт по жанрам в алфавитном порядке, минимальным является последний в списке: 1. MATH_ROCK 2.POST_ROCK 3.ROCK 4.SOUL
       tags:
         - Bands
       operationId: getGroupWithMinGenre
@@ -455,6 +457,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Single'
+      required:
+        - id
+        - name
+        - coordinates
+        - creationDate
+        - numberOfParticipants
+        - description
+        - genre
           
     Person:
       type: object
@@ -471,6 +481,12 @@ components:
           uniqueItems: true
         location:
           $ref: '#/components/schemas/Location'
+        groupID:
+          type: integer
+      required:
+        - id
+        - location
+        - groupID
 
     Single:
       type: object
@@ -511,6 +527,10 @@ components:
           type: string
           minLength: 1
           nullable: true
+      required:
+        - x
+        - y
+        - z
         
     MusicGenre:
       type: string
