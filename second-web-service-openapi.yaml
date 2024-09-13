@@ -149,7 +149,7 @@ components:
         genre:
           $ref: '#/components/schemas/MusicGenre'
         frontMan:
-          $ref: '#/components/schemas/Person'
+          $ref: '#/components/schemas/Frontman'
         singles:
           type: array
           items:
@@ -247,3 +247,22 @@ components:
         message:
           type: string
           example: Ресурс не найден
+        
+    Frontman:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+        birthday:
+          type: string
+          format: date
+          nullable: true
+        passportID:
+          type: string
+          uniqueItems: true
+        location:
+          $ref: '#/components/schemas/Location'
+      required:
+        - id
+        - location
