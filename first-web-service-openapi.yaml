@@ -40,10 +40,6 @@ paths:
                   message:
                     type: string
                     example: Координата y не может быть меньше -439
-                  time:
-                    type: string
-                    format: date-time
-                    example: 2024-09-13T11:00:01.637Z
     get:
       summary: Получение всех групп
       tags:
@@ -192,10 +188,6 @@ paths:
                   message:
                     type: string
                     example: Неправильные параметры
-                  time:
-                    type: string
-                    format: date-time
-                    example: 2024-09-13T11:00:01.637Z
         '404':
            description: Ошибка. Данный ресурс не найден
            content:
@@ -210,10 +202,6 @@ paths:
                   message:
                     type: string
                     example: Ресурс не найден
-                  time:
-                    type: string
-                    format: date-time
-                    example: 2024-09-13T11:00:01.637Z
   /bands/{band-id}:
     get:
       summary: Получение группы по идентификатору
@@ -248,10 +236,6 @@ paths:
                   message:
                     type: string
                     example: Ресурс не найден
-                  time:
-                    type: string
-                    format: date-time
-                    example: 2024-09-13T11:00:01.637Z
     delete:
       summary: Удаление группы по идентификатору
       tags: 
@@ -283,10 +267,6 @@ paths:
                   message:
                     type: string
                     example: Ресурс не найден
-                  time:
-                    type: string
-                    format: date-time
-                    example: 2024-09-13T11:00:01.637Z
     put:
       summary: Обновление данных о группе по идентификатору
       tags: 
@@ -326,10 +306,6 @@ paths:
                   message:
                     type: string
                     example: Координата y не может быть меньше -439
-                  time:
-                    type: string
-                    format: date-time
-                    example: 2024-09-13T11:00:01.637Z
             
         '404':
            description: Ошибка. Данный ресурс не найден
@@ -345,10 +321,6 @@ paths:
                   message:
                     type: string
                     example: Ресурс не найден
-                  time:
-                    type: string
-                    format: date-time
-                    example: 2024-09-13T11:00:01.637Z
   /bands/genre/{genre}:
     delete:
       summary: Удаление групп по жанру
@@ -387,10 +359,6 @@ paths:
                   message:
                     type: string
                     example: Ресурс не найден
-                  time:
-                    type: string
-                    format: date-time
-                    example: 2024-09-13T11:00:01.637Z
   /bands/genre/min:
     get:
       summary: Получение группы с минимальным жанром
@@ -419,10 +387,6 @@ paths:
                     message:
                       type: string
                       example: Неправильные параметры
-                    time:
-                      type: string
-                      format: date-time
-                      example: 2024-09-13T11:00:01.637Z
 components:
   schemas:
     Band:
