@@ -154,7 +154,30 @@ paths:
             type: string
             minLength: 1
             maxLength: 22
-            example: 1123avefsv    
+            example: 1123avefsv
+        - name: sortBy
+          in: query
+          description: Параметр для сортировки
+          required: false
+          schema:
+            type: string
+            enum:
+              - id
+              - name
+              - creationDate
+              - numberOfParticipants
+              - genre
+            example: name
+        - name: sortDirection
+          in: query
+          description: Направление сортировки
+          required: false
+          schema:
+            type: string
+            enum:
+              - ASC
+              - DESC
+            example: ASC
       responses:
         '200':
           description: Успешный ответ с массивом групп
