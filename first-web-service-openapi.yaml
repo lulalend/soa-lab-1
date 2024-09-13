@@ -206,7 +206,7 @@ paths:
         - Bands
       operationId: getPersonById
       parameters:
-        - name: band_id
+        - name: band-id
           description: Идентификатор группы
           in: path
           required: true
@@ -231,7 +231,7 @@ paths:
         - Bands
       operationId: deleteBandById
       parameters:
-        - name: band_id
+        - name: band-id
           description: Идентификатор группы
           in: path
           required: true
@@ -260,7 +260,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Band"
       parameters:
-        - name: band_id
+        - name: band-id
           description: Идентификатор группы
           in: path
           required: true
