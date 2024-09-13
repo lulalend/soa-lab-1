@@ -68,93 +68,6 @@ paths:
             type: integer
             minimum: 1
             example: 10
-        - name: id
-          in: query
-          description: Идентификатор группы
-          required: false
-          schema:
-            type: integer
-            minimum: 1
-            example: 1
-        - name: name
-          in: query
-          description: Имя группы
-          required: false
-          schema:
-            type: string
-            minLength: 1
-            example: ZOLOTO
-        - name: coordinate.x
-          in: query
-          description: Координата х
-          required: false
-          schema:
-            type: number
-            format: int64
-            example: 1.0
-        - name: coordinate.y
-          in: query
-          description: Координата y
-          required: false
-          schema:
-            type: number
-            format: double
-            minimum: -439
-            example: 1
-        - name: creationDate
-          in: query
-          description: Дата создания
-          required: false
-          schema:
-            type: string
-            format: date-time
-            nullable: false
-            example: 2024-09-13T11:00:01.637Z
-        - name: numberOfParticipants
-          in: query
-          description: количество участников
-          required: false
-          schema:
-            type: integer
-            minimum: 1
-            example: 1
-        - name: description
-          in: query
-          description: описание группы
-          required: false
-          schema:
-            type: string
-            minLength: 1
-            example: бебебе
-        - name: genre
-          in: query
-          description: Жанр группы
-          required: false
-          schema:
-            type: string
-            enum:
-              - ROCK
-              - SOUL
-              - MATH_ROCK
-              - POST_ROCK
-            example: SOUL
-        - name: person.name
-          in: query
-          description: Имя солиста
-          required: false
-          schema:
-            type: string
-            minLength: 1
-            example: Владимир
-        - name: person.passportID
-          in: query
-          description: Идентификатор паспорта
-          required: false
-          schema:
-            type: string
-            minLength: 1
-            maxLength: 22
-            example: 1123avefsv
         - name: sortBy
           in: query
           description: Параметр для сортировки
@@ -178,6 +91,248 @@ paths:
               - ASC
               - DESC
             example: ASC
+        - name: id
+          in: query
+          description: Идентификатор группы
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+        - name: id.gt
+          in: query
+          description: Идентификатор группы должен быть больше...
+          required: false
+          schema:
+            type: integer
+            example: 25
+        - name: id.gte
+          in: query
+          description: Идентификатор группы должен быть больше или равен...
+          required: false
+          schema:
+            type: integer
+            example: 24
+        - name: id.lt
+          in: query
+          description: Идентификатор группы должен быть меньше...
+          required: false
+          schema:
+            type: integer
+            example: 13
+        - name: id.lte
+          in: query
+          description: Идентификатор группы должен быть меньше или равен...
+          required: false
+          schema:
+            type: integer
+            example: 12
+        - name: name
+          in: query
+          description: Имя группы
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            example: ZOLOTO
+        - name: coordinate.x
+          in: query
+          description: Координата х
+          required: false
+          schema:
+            type: number
+            format: int64
+            example: 1.0
+        - name: coordinate.x.gt
+          in: query
+          description: Координата х должна быть больше...
+          required: false
+          schema:
+            type: number
+            format: int64
+            example: 45.0
+        - name: coordinate.x.gte
+          in: query
+          description: Координата х должна быть больше или равна...
+          required: false
+          schema:
+            type: number
+            format: int64
+            example: 44.0
+        - name: coordinate.x.lt
+          in: query
+          description: Координата х должна быть меньше...
+          required: false
+          schema:
+            type: number
+            format: int64
+            example: 23.0
+        - name: coordinate.x.lte
+          in: query
+          description: Координата х должна быть меньше или равна...
+          required: false
+          schema:
+            type: number
+            format: int64
+            example: 22.0
+        - name: coordinate.y
+          in: query
+          description: Координата y
+          required: false
+          schema:
+            type: number
+            format: double
+            minimum: -439
+            example: 1
+        - name: coordinate.y.gt
+          in: query
+          description: Координата y должна быть больше...
+          required: false
+          schema:
+            type: number
+            format: double
+            minimum: -439
+            example: 52
+        - name: coordinate.y.gte
+          in: query
+          description: Координата y должна быть больше или равна...
+          required: false
+          schema:
+            type: number
+            format: double
+            minimum: -439
+            example: 82
+        - name: coordinate.y.lt
+          in: query
+          description: Координата y должна быть меньше...
+          required: false
+          schema:
+            type: number
+            format: double
+            minimum: -439
+            example: 66
+        - name: coordinate.y.lte
+          in: query
+          description: Координата y должна быть меньше или равна...
+          required: false
+          schema:
+            type: number
+            format: double
+            minimum: -439
+            example: 43
+        - name: creationDate
+          in: query
+          description: Дата создания
+          required: false
+          schema:
+            type: string
+            format: date-time
+            nullable: false
+            example: 2024-09-13T11:00:01.637Z
+        - name: creationDate.gt
+          in: query
+          description: Дата создания должна быть позже...
+          required: false
+          schema:
+            type: string
+            format: date-time
+            nullable: false
+            example: 2007-07-13T11:00:01.637Z
+        - name: creationDate.gte
+          in: query
+          description: Дата создания должна быть позже или равна...
+          required: false
+          schema:
+            type: string
+            format: date-time
+            nullable: false
+            example: 2024-09-30T11:00:01.637Z
+        - name: creationDate.lt
+          in: query
+          description: Дата создания должна быть раньше...
+          required: false
+          schema:
+            type: string
+            format: date-time
+            nullable: false
+            example: 2024-09-12T11:00:01.637Z
+        - name: creationDate.lte
+          in: query
+          description: Дата создания должна быть раньше или равна...
+          required: false
+          schema:
+            type: string
+            format: date-time
+            nullable: false
+            example: 2024-08-13T11:00:01.637Z
+        - name: numberOfParticipants
+          in: query
+          description: Количество участников
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+        - name: numberOfParticipants.gt
+          in: query
+          description: Количество участников должно быть больше...
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+        - name: numberOfParticipants.gte
+          in: query
+          description: Количество участников должно быть больше или равно...
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+        - name: numberOfParticipants.lt
+          in: query
+          description: Количество участников должно быть меньше...
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+        - name: numberOfParticipants.lte
+          in: query
+          description: Количество участников должно быть меньше или равно...
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+        - name: description
+          in: query
+          description: Описание группы
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            example: Мы лучшая группа в мире
+        - name: genre
+          in: query
+          description: Жанр группы
+          required: false
+          schema:
+            type: string
+            enum:
+              - ROCK
+              - SOUL
+              - MATH_ROCK
+              - POST_ROCK
+            example: SOUL
+        - name: person.name
+          in: query
+          description: Имя солиста
+          required: false
+          schema:
+            type: string
+            minLength: 1
+            example: Владимир
       responses:
         '200':
           description: Успешный ответ с массивом групп
@@ -349,7 +504,7 @@ paths:
   /bands/genre/min:
     get:
       summary: Получение группы с минимальным жанром
-      description: Сортировка идёт по жанрам в алфавитном порядке, минимальным является последний в списке: 1. MATH_ROCK 2.POST_ROCK 3.ROCK 4.SOUL
+      description: 'Сортировка идёт по жанрам в алфавитном порядке, минимальным является последний в списке: 1. MATH_ROCK, 2. POST_ROCK, 3. ROCK, 4. SOUL'
       tags:
         - Bands
       operationId: getGroupWithMinGenre
@@ -375,11 +530,11 @@ paths:
                       type: string
                       example: Неправильные параметры
           default:
-          description: Дефолтная ошибка
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DefaultError'
+            description: Дефолтная ошибка
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/DefaultError'
 components:
   schemas:
     Band:
@@ -399,7 +554,7 @@ components:
           type: string
           format: date-time
           readOnly: true
-          default: "${now}"
+          default: 2024-09-13T11:00:01.637Z
         numberOfParticipants:
           type: number
           format: int64
