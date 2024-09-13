@@ -30,7 +30,25 @@ paths:
               schema:
                 $ref: '#/components/schemas/Band'
         '400':
-          description: Некорректный ввод данных
+            description: Ошибка. Неправильные параметры
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      format: int32
+                      example: 400
+                    message:
+                      type: string
+                      example: Неправильные параметры
+        default:
+          description: Дефолтная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultError'v
 
 
   /band/{band-id}/participants/add:
@@ -54,7 +72,25 @@ paths:
               schema:
                 $ref: '#/components/schemas/Person'
         '400':
-          description: Некорректный ввод данных
+            description: Ошибка. Неправильные параметры
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      format: int32
+                      example: 400
+                    message:
+                      type: string
+                      example: Неправильные параметры
+        default:
+          description: Дефолтная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultError'
 
 components:
   schemas:
@@ -172,12 +208,9 @@ components:
         - SOUL
         - MATH_ROCK
         - POST_ROCK
-    Error:
+
+    DefaultError:
       type: object
-      required:
-        - httpCode
-        - message
-        - time
       properties:
         code:
           type: integer
@@ -185,4 +218,4 @@ components:
           example: 404
         message:
           type: string
-          example: Not Found
+          example: Ресурс не найден

@@ -40,6 +40,12 @@ paths:
                   message:
                     type: string
                     example: Координата y не может быть меньше -439
+        default:
+          description: Дефолтная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultError'
     get:
       summary: Получение всех групп
       tags:
@@ -148,8 +154,7 @@ paths:
             type: string
             minLength: 1
             maxLength: 22
-            example: 1123avefsv
-           
+            example: 1123avefsv    
       responses:
         '200':
           description: Успешный ответ с массивом групп
@@ -188,20 +193,12 @@ paths:
                   message:
                     type: string
                     example: Неправильные параметры
-        '404':
-           description: Ошибка. Данный ресурс не найден
-           content:
+        default:
+          description: Дефолтная ошибка
+          content:
             application/json:
               schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    format: int32
-                    example: 404
-                  message:
-                    type: string
-                    example: Ресурс не найден
+                $ref: '#/components/schemas/DefaultError'
   /bands/{band-id}:
     get:
       summary: Получение группы по идентификатору
@@ -222,20 +219,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Band"
-        '404':
-           description: Ошибка. Данный ресурс не найден
-           content:
+        default:
+          description: Дефолтная ошибка
+          content:
             application/json:
               schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    format: int32
-                    example: 404
-                  message:
-                    type: string
-                    example: Ресурс не найден
+                $ref: '#/components/schemas/DefaultError'
     delete:
       summary: Удаление группы по идентификатору
       tags: 
@@ -253,20 +242,12 @@ paths:
           description: Успешный ответ
           content:
             application/json: {}
-        '404':
-           description: Ошибка. Данный ресурс не найден
-           content:
+        default:
+          description: Дефолтная ошибка
+          content:
             application/json:
               schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    format: int32
-                    example: 404
-                  message:
-                    type: string
-                    example: Ресурс не найден
+                $ref: '#/components/schemas/DefaultError'
     put:
       summary: Обновление данных о группе по идентификатору
       tags: 
@@ -306,21 +287,12 @@ paths:
                   message:
                     type: string
                     example: Координата y не может быть меньше -439
-            
-        '404':
-           description: Ошибка. Данный ресурс не найден
-           content:
+        default:
+          description: Дефолтная ошибка
+          content:
             application/json:
               schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    format: int32
-                    example: 404
-                  message:
-                    type: string
-                    example: Ресурс не найден
+                $ref: '#/components/schemas/DefaultError'
   /bands/genre/{genre}:
     delete:
       summary: Удаление групп по жанру
@@ -345,20 +317,12 @@ paths:
           description: Успешный ответ
           content:
             application/json: {}
-        '404':
-           description: Ошибка. Данный ресурс не найден
-           content:
+        default:
+          description: Дефолтная ошибка
+          content:
             application/json:
               schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    format: int32
-                    example: 404
-                  message:
-                    type: string
-                    example: Ресурс не найден
+                $ref: '#/components/schemas/DefaultError'
   /bands/genre/min:
     get:
       summary: Получение группы с минимальным жанром
@@ -387,6 +351,12 @@ paths:
                     message:
                       type: string
                       example: Неправильные параметры
+          default:
+          description: Дефолтная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultError'
 components:
   schemas:
     Band:
@@ -503,3 +473,14 @@ components:
         - SOUL
         - MATH_ROCK
         - POST_ROCK
+    
+    DefaultError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 404
+        message:
+          type: string
+          example: Ресурс не найден
