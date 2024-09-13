@@ -142,7 +142,7 @@ paths:
           schema:
             type: number
             format: int64
-            example: 1.0
+            example: 1
         - name: coordinate.x.gt
           in: query
           description: Координата х должна быть больше...
@@ -150,7 +150,7 @@ paths:
           schema:
             type: number
             format: int64
-            example: 45.0
+            example: 45
         - name: coordinate.x.gte
           in: query
           description: Координата х должна быть больше или равна...
@@ -158,7 +158,7 @@ paths:
           schema:
             type: number
             format: int64
-            example: 44.0
+            example: 44
         - name: coordinate.x.lt
           in: query
           description: Координата х должна быть меньше...
@@ -166,7 +166,7 @@ paths:
           schema:
             type: number
             format: int64
-            example: 23.0
+            example: 23
         - name: coordinate.x.lte
           in: query
           description: Координата х должна быть меньше или равна...
@@ -174,7 +174,7 @@ paths:
           schema:
             type: number
             format: int64
-            example: 22.0
+            example: 22
         - name: coordinate.y
           in: query
           description: Координата y
@@ -431,12 +431,57 @@ paths:
       tags: 
         - Bands
       operationId: updateBandById
-      requestBody:
-        required: true
-        content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Band"
+      parameters:
+        - name: id
+          in: query
+          description: Идентификатор группы
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
+        - name: name
+          in: query
+          description: Имя группы
+          required: true
+            schema:
+              type: string
+              minLength: 1
+              example: ZOLOTO
+        - name: coordinate.x
+          in: query
+          description: Координата х
+          required: true
+            schema:
+              type: number
+              format: int64
+              example: 1
+        - name: coordinate.y
+          in: query
+          description: Координата y
+          required: false
+          schema:
+            type: number
+            format: double
+            minimum: -439
+            example: 1
+        - name: creationDate
+          in: query
+          description: Дата создания
+          required: false
+          schema:
+            type: string
+            format: date-time
+            nullable: false
+            example: 2024-09-13T11:00:01.637Z
+        - name: numberOfParticipants
+          in: query
+          description: количество участников
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            example: 1
       parameters:
         - name: band-id
           description: Идентификатор группы
