@@ -593,7 +593,7 @@ components:
           type: string
           format: date-time
           readOnly: true
-          default: 2024-09-13T11:00:01.637Z
+          default: 2011-12-03T10:15:30+01:00
         numberOfParticipants:
           type: number
           format: int64

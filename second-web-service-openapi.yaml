@@ -208,7 +208,7 @@ components:
           type: string
           format: date-time
           readOnly: true
-          default: "${now}"
+          default: "2011-12-03T10:15:30+01:00"
         numberOfParticipants:
           type: number
           format: int64
