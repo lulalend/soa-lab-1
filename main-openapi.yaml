@@ -214,7 +214,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DefaultError'
-    put:
+    patch:
       summary: Обновление данных о группе по идентификатору
       tags: 
         - Bands
