@@ -2,14 +2,14 @@ openapi: 3.0.0
 info:
   title: Music Bands Service
   version: 1.0.0
-  description: A sample API for interaction with a collection of music bands
+  description: Простое API для взаимодействия с синглами и участниками музыкальных групп
 servers:
   - url: 'https://localhost:8080/api/v1/grammy'
 
 paths:
   /band/{band-id}/singles/add:
     post:
-      summary: Добавление нового сингла группе
+      summary: Создание нового сингла
       tags: 
         - Bands updates
       operationId: addSingle
@@ -21,9 +21,15 @@ paths:
           schema:
             type: number
             minimum: 1
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Single"
       responses:
-        '200':
-          description: Успешно добавлено
+        '201':
+          description: Успешно создано
           content:
             application/json:
               schema:
@@ -56,8 +62,8 @@ paths:
                   message:
                     type: string
                     example: Сервер не доступен
-        default:
-          description: Дефолтная ошибка
+        '404':
+          description: Ошибка по умолчанию
           content:
             application/json:
               schema:
@@ -68,7 +74,7 @@ paths:
       summary: Изменение сингла
       tags: 
         - Bands updates
-      operationId: addParticipant
+      operationId: changeSingle
       parameters:
         - name: band-id
           description: Идентификатор группы
@@ -84,16 +90,15 @@ paths:
           schema:
             type: number
             minimum: 1
-        - name: single-id
-          description: Идентификатор сингла
-          in: query
-          required: true
-          schema:
-            type: string
-            maxLength: 10
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Single"
       responses:
         '200':
-          description: Успешно добавлено
+          description: Успешно обновлено
           content:
             application/json:
               schema:
@@ -126,8 +131,8 @@ paths:
                   message:
                     type: string
                     example: Сервер не доступен
-        default:
-          description: Дефолтная ошибка
+        '404':
+          description: Ошибка по умолчанию
           content:
             application/json:
               schema:
@@ -146,10 +151,16 @@ paths:
           in: path
           required: true
           schema:
-            $ref: '#/components/schemas/Person'
+            type: integer
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Person"
       responses:
-        '200':
-          description: Успешно добавлено
+        '201':
+          description: Успешно создано
           content:
             application/json:
               schema:
@@ -182,8 +193,8 @@ paths:
                   message:
                     type: string
                     example: Сервер не доступен
-        default:
-          description: Дефолтная ошибка
+        '404':
+          description: Ошибка по умолчанию
           content:
             application/json:
               schema:
@@ -235,6 +246,11 @@ components:
     Person:
       type: object
       properties:
+        id:
+          type: integer
+          minimum: 1
+          uniqueItems: true
+          readOnly: true
         name:
           type: string
           minLength: 1
@@ -251,6 +267,7 @@ components:
           type: integer
       required:
         - id
+        - passportID
         - location
         - groupID
 
@@ -266,10 +283,18 @@ components:
           type: string
           minLength: 1
           maxLength: 10
+      required:
+        - id
+        - name
 
     Coordinates:
       type: object
       properties:
+        id:
+          type: integer
+          minimum: 1
+          uniqueItems: true
+          readOnly: true
         x:
           type: number
           format: int64
@@ -279,12 +304,18 @@ components:
           minimum: -439
           nullable: false
       required:
+        - id
         - x
         - y
         
     Location:
       type: object
       properties:
+        id:
+          type: integer
+          minimum: 1
+          uniqueItems: true
+          readOnly: true
         x:
           type: number
           format: float
@@ -299,6 +330,7 @@ components:
           minLength: 1
           nullable: true
       required:
+        - id
         - x
         - y
         - z
@@ -325,6 +357,11 @@ components:
     Frontman:
       type: object
       properties:
+        id:
+          type: integer
+          minimum: 1
+          uniqueItems: true
+          readOnly: true
         name:
           type: string
           minLength: 1
@@ -339,4 +376,5 @@ components:
           $ref: '#/components/schemas/Location'
       required:
         - id
+        - passportID
         - location
