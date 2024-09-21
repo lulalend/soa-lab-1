@@ -55,7 +55,7 @@ paths:
         - name: sort
           in: query
           description: >+
-            Параметр для сортировки. Структура: sort={parameter}[order]. Строковые значения в type регистронезависимы \
+            Параметр для сортировки. Структура: sort={parameter}[order].\
 
             **Доступные параметры для сортировки:** id, name, coordinate.x, coordinate.y, creationDate, numberOfParticipants, description, person.name, genre.\
             
