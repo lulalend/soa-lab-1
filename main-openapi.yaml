@@ -270,8 +270,9 @@ paths:
             application/json:
               schema:
                 type: array
-                items:
+                items: 
                   $ref: '#/components/schemas/MusicGenre'
+                example: [ ROCK, SOUL, MATH_ROCK, POST_ROCK ]
         default:
           description: Ошибка по умолчанию
           content:
