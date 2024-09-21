@@ -406,13 +406,13 @@ components:
           uniqueItems: true
         location:
           $ref: '#/components/schemas/Location'
-        groupID:
+        bandID:
           type: integer
       required:
         - id
         - passportID
         - location
-        - groupID
+        - bandID
 
     Single:
       type: object

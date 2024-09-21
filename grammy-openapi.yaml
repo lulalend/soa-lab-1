@@ -159,7 +159,7 @@ paths:
         content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Person"
+                $ref: "#/components/schemas/PersonToBand"
       responses:
         '201':
           description: Успешно создано
@@ -245,7 +245,7 @@ components:
         - description
         - genre
           
-    Person:
+    PersonProperties:
       type: object
       properties:
         id:
@@ -265,13 +265,24 @@ components:
           uniqueItems: true
         location:
           $ref: '#/components/schemas/Location'
-        groupID:
-          type: integer
-      required:
-        - id
-        - passportID
-        - location
-        - groupID
+      
+    Person:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PersonProperties'
+        - properties:
+            bandID:
+              type: integer
+          required: [id, passportID, location, bandID]
+    
+    PersonToBand:
+      type: object
+      allOf: 
+        - $ref: '#/components/schemas/PersonProperties'
+        - required:
+          - id
+          - passportID
+          - location
 
     Single:
       type: object
