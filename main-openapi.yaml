@@ -77,7 +77,7 @@ paths:
           description: >+
             Параметр для фильтрации. Структура: filter={parameter}[operator]={type}. Строковые значения в type регистронезависимы \
 
-            **Доступные параметры для фильтрации:** id, name, coordinate.x, coordinate.y, creationDate, numberOfParticipants, person.name, genre.\
+            **Доступные параметры для фильтрации:** id, name, coordinate.x, coordinate.y, creationDate, numberOfParticipants, description, person.name, genre.\
             
             **Доступные операторы:** 
             
