@@ -386,7 +386,7 @@ components:
       allOf: 
         - $ref: '#/components/schemas/BandProperties'
           
-    Person:
+    PersonProperties:
       type: object
       properties:
         id:
@@ -406,13 +406,24 @@ components:
           uniqueItems: true
         location:
           $ref: '#/components/schemas/Location'
-        bandID:
-          type: integer
-      required:
-        - id
-        - passportID
-        - location
-        - bandID
+      
+    Person:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/PersonProperties'
+        - properties:
+            bandID:
+              type: integer
+          required: [id, passportID, location, bandID]
+    
+    PersonToBand:
+      type: object
+      allOf: 
+        - $ref: '#/components/schemas/PersonProperties'
+        - required:
+          - id
+          - passportID
+          - location
 
     Single:
       type: object
