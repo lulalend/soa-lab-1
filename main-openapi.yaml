@@ -216,6 +216,7 @@ paths:
                 $ref: '#/components/schemas/DefaultError'
     patch:
       summary: Обновление данных о группе по идентификатору
+      description: Обновление может быть частичным, все поля опциональные
       tags: 
         - Bands
       operationId: updateBandById
