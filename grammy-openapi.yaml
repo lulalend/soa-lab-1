@@ -63,7 +63,7 @@ paths:
                   message:
                     type: string
                     example: Сервер не доступен
-        '404':
+        default:
           description: Ошибка по умолчанию
           content:
             application/json:
@@ -133,7 +133,7 @@ paths:
                   message:
                     type: string
                     example: Сервер не доступен
-        '404':
+        default:
           description: Ошибка по умолчанию
           content:
             application/json:
@@ -195,7 +195,7 @@ paths:
                   message:
                     type: string
                     example: Сервер не доступен
-        '404':
+        default:
           description: Ошибка по умолчанию
           content:
             application/json:

@@ -40,7 +40,7 @@ paths:
                   message:
                     type: string
                     example: ['Координата y не может быть меньше -439']
-        '404':
+        default:
           description: Ошибка по умолчанию
           content:
             application/json:
@@ -159,7 +159,7 @@ paths:
                   message:
                     type: string
                     example: Неправильные параметры
-        '404':
+        default:
           description: Ошибка по умолчанию
           content:
             application/json:
@@ -185,7 +185,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Band"
-        '404':
+        default:
           description: Ошибка по умолчанию
           content:
             application/json:
@@ -208,7 +208,7 @@ paths:
           description: Ресурс удален успешно
           content:
             application/json: {}
-        '404':
+        default:
           description: Ошибка по умолчанию
           content:
             application/json:
@@ -254,7 +254,7 @@ paths:
                   message:
                     type: string
                     example: Координата y не может быть меньше -439
-        '404':
+        default:
           description: Ошибка по умолчанию
           content:
             application/json:
@@ -284,7 +284,7 @@ paths:
           description: Ресурс успешно удален
           content:
             application/json: {}
-        '404':
+        default:
           description: Ошибка по умолчанию
           content:
             application/json:
@@ -327,7 +327,7 @@ paths:
                     message:
                       type: string
                       example: Неправильные параметры
-          '404':
+          default:
             description: Ошибка по умолчанию
             content:
               application/json:
