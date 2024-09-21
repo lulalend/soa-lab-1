@@ -26,8 +26,7 @@ paths:
         content:
             application/json:
               schema:
-                type: string
-                example: 'Watermelon Sugar'
+                $ref: '#/components/schemas/Single'
       responses:
         '201':
           description: Успешно создано
@@ -96,8 +95,7 @@ paths:
         content:
             application/json:
               schema:
-                type: string
-                example: 'Ethereal'
+                $ref: '#/components/schemas/Single'
       responses:
         '200':
           description: Успешно обновлено
