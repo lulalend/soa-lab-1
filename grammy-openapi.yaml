@@ -24,9 +24,10 @@ paths:
       requestBody:
         required: true
         content:
-            application/json:
+            text/plain:
               schema:
-                $ref: "#/components/schemas/Single"
+                type: string
+                example: 'Watermelon Sugar'
       responses:
         '201':
           description: Успешно создано
@@ -93,9 +94,10 @@ paths:
       requestBody:
         required: true
         content:
-            application/json:
+            text/plain:
               schema:
-                $ref: "#/components/schemas/Single"
+                type: string
+                example: 'Ethereal'
       responses:
         '200':
           description: Успешно обновлено
@@ -282,7 +284,6 @@ components:
         name:
           type: string
           minLength: 1
-          maxLength: 10
       required:
         - id
         - name
