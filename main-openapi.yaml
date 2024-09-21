@@ -54,33 +54,30 @@ paths:
       parameters:
         - name: sort
           in: query
-          description: Параметр для сортировки
+          description: >+
+            Параметр для сортировки. Структура: sort={parameter}[order]. Строковые значения в type регистронезависимы \
+
+            **Доступные параметры для сортировки:** id, name, coordinate.x, coordinate.y, creationDate, numberOfParticipants, description, person.name, genre.\
+            
+            **Доступные типы сортировок:** 
+            
+            * **asc - по возрастанию**
+            
+            * **desc - по убыванию**
+            
           required: false
           schema:
-            type: string
-            enum:
-              - id
-              - name
-              - creationDate
-              - numberOfParticipants
-              - genre
-            example: name
-        - name: order
-          in: query
-          description: Направление сортировки (ASC по умолчанию, варианты регистронезависимые)
-          required: false
-          schema:
-            type: string
-            enum:
-              - ASC
-              - DESC
-            example: ASC
+            type: array
+            items:
+              type: string
+              example: "name[asc]"
+            example: ["name[asc]", "numberOfParticipants[desc]"]
         - name: filter
           in: query
           description: >+
             Параметр для фильтрации. Структура: filter={parameter}[operator]={type}. Строковые значения в type регистронезависимы \
 
-            **Доступные параметры для фильтрации:** id, name, coordinate.x, coordinate.y, creationDate, numberOfParticipants, person.name, genre.
+            **Доступные параметры для фильтрации:** id, name, coordinate.x, coordinate.y, creationDate, numberOfParticipants, person.name, genre.\
             
             **Доступные операторы:** 
             
@@ -254,6 +251,27 @@ paths:
                   message:
                     type: string
                     example: ['Координата y не может быть меньше -439']
+        default:
+          description: Ошибка по умолчанию
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultError'
+  /bands/genre:
+    get:
+      summary: Получение всех доступных жанров
+      tags: 
+        - Bands
+      operationId: getAllGenres
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MusicGenre'
         default:
           description: Ошибка по умолчанию
           content:
